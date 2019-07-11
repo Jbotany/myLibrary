@@ -11,7 +11,11 @@
                 Par Titres
             </a>
         </span>
-        <span class="badge badge-pill badge-light badgeUnit">Par Auteurs</span>
+        <span class="badge badge-pill badge-light badgeUnit">
+            <a href="{{ path('bookByAuthor') }}">
+                Par Auteurs
+            </a>
+        </span>
     </div>
 
     {% if books is defined %}

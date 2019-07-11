@@ -1,0 +1,49 @@
+.h1 {
+  text-align: center;
+}
+
+h1, h2, h3 {
+  font-family: $titleFont, serif;
+}
+
+h1 {
+  padding-bottom: 5vw;
+  padding-top: 5vw;
+  background-color: $lightColor;
+  color: $darkColor;
+}
+
+p, .textClass {
+  font-family: $textFont, sans-serif;
+}
+
+.cardBook {
+  margin-bottom: 2vw;
+  border: solid $darkColor 1vw;
+  background-color: $lightColorSecondary;
+}
+
+.navbar {
+  background-color: $darkColor;
+  color: $darkColor;
+}
+
+.badges {
+  font-size: 1.5rem;
+  margin-bottom: 3vw;
+  margin-top: 3vw;
+}
+
+.badgeUnit {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  width: 40vw;
+  background-color: $darkColor;
+  color: $lightColor;
+  padding: 3vw;
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: $lightColor;
+}

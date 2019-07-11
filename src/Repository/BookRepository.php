@@ -19,6 +19,18 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function orderBooksByAuthor()
+    {
+        //todo
+
+        $qb = $this->createQueryBuilder('b')
+            ->select('b.title')
+            ->orderBy('b.authors.lastname')
+            ->getQuery();
+
+        $qb->execute();
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

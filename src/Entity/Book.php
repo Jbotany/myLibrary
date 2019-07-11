@@ -31,7 +31,7 @@ class Book
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $possessed;
+    private $owned;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -71,7 +71,7 @@ class Book
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
      */
-    private $author;
+    private $authors;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Publisher", inversedBy="books")
@@ -85,7 +85,7 @@ class Book
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
+        $this->authors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,14 +105,14 @@ class Book
         return $this;
     }
 
-    public function getPossessed(): ?bool
+    public function getOwned(): ?bool
     {
-        return $this->possessed;
+        return $this->owned;
     }
 
-    public function setPossessed(bool $possessed): self
+    public function setOwned(bool $owned): self
     {
-        $this->possessed = $possessed;
+        $this->owned = $owned;
 
         return $this;
     }
@@ -216,24 +216,24 @@ class Book
     /**
      * @return Collection|Author[]
      */
-    public function getAuthor(): Collection
+    public function getAuthors(): Collection
     {
-        return $this->author;
+        return $this->authors;
     }
 
-    public function addAuthor(Author $author): self
+    public function addAuthors(Author $author): self
     {
-        if (!$this->author->contains($author)) {
-            $this->author[] = $author;
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
         }
 
         return $this;
     }
 
-    public function removeAuthor(Author $author): self
+    public function removeAuthors(Author $author): self
     {
-        if ($this->author->contains($author)) {
-            $this->author->removeElement($author);
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
         }
 
         return $this;
