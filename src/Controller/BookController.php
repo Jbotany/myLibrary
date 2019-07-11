@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Library;
 use App\Repository\BookRepository;
 use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +13,12 @@ class BookController extends AbstractController
 
     private $bookRepository;
     private $libraryRepository;
+    private $library;
 
     public function __construct(BookRepository $bookRepository, LibraryRepository $libraryRepository)
     {
         $this->bookRepository = $bookRepository;
         $this->libraryRepository = $libraryRepository;
-
     }
 
     /**
@@ -37,14 +38,14 @@ class BookController extends AbstractController
     /**
      * @Route("/book/author", name="bookByAuthor")
      */
-    public function booksByAuthor()
+    public function booksByAuthor(Library $library)
     {
-        $books = $this->bookRepository->findAll();
-        $library = $this->libraryRepository->findOneBy(['id' => 1]);
+        $books = $this->bookRepository->findBooksByLibrary($library);
+        $currentLibrary = $library;
 
         return $this->render('book/byAuthor.html.twig', [
             'books' => $books,
-            'library' => $library
+            'library' => $currentLibrary
         ]);
     }
 

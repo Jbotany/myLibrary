@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,6 +20,19 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function findBooksByLibrary(Library $library)
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->where('d.libraries = :lib.id')
+            ->setParameter('lib.id', $library->getId())
+            ->getQuery();
+
+        $qb->execute();
+    }
+
+
+
+
     public function orderBooksByAuthor()
     {
         //todo
@@ -30,6 +44,9 @@ class BookRepository extends ServiceEntityRepository
 
         $qb->execute();
     }
+
+
+
 
     // /**
     //  * @return Book[] Returns an array of Book objects
