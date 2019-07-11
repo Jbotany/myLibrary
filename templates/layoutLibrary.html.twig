@@ -10,6 +10,9 @@
 </head>
 <body>
 <header>
+    {% block navbar %}
+        {% include 'common/_nav.html.twig' %}
+    {% endblock %}
 </header>
 {% block body %}{% endblock %}
 {% block javascripts %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+
+    <h1 class="h1Reverse">Mes bibliothèques</h1>
+
+    <div class="text-center libraries">
+        <span class="badge badge-pill badge-light badgeUnit">
+            <a href="#">
+                Créer une nouvelle Bibliothèque
+            </a>
+        </span>
+    </div>
+
+    {% if libraries is defined %}
+        <h2 class="text-center">Mes bibliothèques</h2>
+        {% for library in libraries %}
+            <div class="text-center libraries">
+                <span class="badge badge-pill badge-light badgeUnit">
+                    <a href="#">
+                        {{ library.name }}
+                    </a>
+                </span>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
