@@ -19,7 +19,7 @@
         {% for library in libraries %}
             <div class="text-center libraries">
                 <span class="badge badge-pill badge-light badgeUnit">
-                    <a href="#">
+                    <a href="{{ path('library', {'id':library.id}) }}">
                         {{ library.name }}
                     </a>
                 </span>

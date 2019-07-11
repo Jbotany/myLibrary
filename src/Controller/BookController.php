@@ -6,6 +6,7 @@ use App\Entity\Library;
 use App\Repository\BookRepository;
 use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
@@ -24,14 +25,14 @@ class BookController extends AbstractController
     /**
      * @Route("/book", name="book")
      */
-    public function index()
+    public function index(Library $library, SessionInterface $session)
     {
-        $books = $this->bookRepository->findBy([], ['title' => 'ASC']);
-        $library = $this->libraryRepository->findOneBy(['id' => 1]);
+        $books = $this->bookRepository->findBooksByLibrary($library);
+        $currentLibrary = $session->get('library');
 
         return $this->render('book/index.html.twig', [
             'books' => $books,
-            'library' => $library
+            'currentLibrary' => $currentLibrary
         ]);
     }
 
@@ -41,11 +42,11 @@ class BookController extends AbstractController
     public function booksByAuthor(Library $library)
     {
         $books = $this->bookRepository->findBooksByLibrary($library);
-        $currentLibrary = $library;
+        $currentLibrary = $session->get('library');
 
         return $this->render('book/byAuthor.html.twig', [
             'books' => $books,
-            'library' => $currentLibrary
+            'currentLibrary' => $currentLibrary
         ]);
     }
 
