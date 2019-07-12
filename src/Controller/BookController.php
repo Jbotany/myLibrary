@@ -2,51 +2,43 @@
 
 namespace App\Controller;
 
-use App\Entity\Library;
 use App\Repository\BookRepository;
-use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
 {
 
     private $bookRepository;
-    private $libraryRepository;
-    private $library;
 
-    public function __construct(BookRepository $bookRepository, LibraryRepository $libraryRepository)
-    {
+    public function __construct(
+        BookRepository $bookRepository
+    ) {
         $this->bookRepository = $bookRepository;
-        $this->libraryRepository = $libraryRepository;
     }
 
     /**
      * @Route("/book", name="book")
      */
-    public function index(Library $library, SessionInterface $session)
+    public function index()
     {
-        $books = $this->bookRepository->findBooksByLibrary($library);
-        $currentLibrary = $session->get('library');
+        $books = $this->bookRepository->findAll();
 
         return $this->render('book/index.html.twig', [
             'books' => $books,
-            'currentLibrary' => $currentLibrary
         ]);
     }
 
     /**
      * @Route("/book/author", name="bookByAuthor")
      */
-    public function booksByAuthor(Library $library)
+    public function booksByAuthor()
     {
-        $books = $this->bookRepository->findBooksByLibrary($library);
-        $currentLibrary = $session->get('library');
+        $books = $this->bookRepository->findAll();
+
 
         return $this->render('book/byAuthor.html.twig', [
             'books' => $books,
-            'currentLibrary' => $currentLibrary
         ]);
     }
 

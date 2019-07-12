@@ -83,15 +83,9 @@ class Book
      */
     private $summary;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Library", inversedBy="books")
-     */
-    private $libraries;
-
     public function __construct()
     {
         $this->authors = new ArrayCollection();
-        $this->libraries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -265,32 +259,6 @@ class Book
     public function setSummary(?string $summary): self
     {
         $this->summary = $summary;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Library[]
-     */
-    public function getLibraries(): Collection
-    {
-        return $this->libraries;
-    }
-
-    public function addLibrary(Library $library): self
-    {
-        if (!$this->libraries->contains($library)) {
-            $this->libraries[] = $library;
-        }
-
-        return $this;
-    }
-
-    public function removeLibrary(Library $library): self
-    {
-        if ($this->libraries->contains($library)) {
-            $this->libraries->removeElement($library);
-        }
 
         return $this;
     }

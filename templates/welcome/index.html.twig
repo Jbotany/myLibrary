@@ -4,27 +4,38 @@
 
 {% block body %}
 
-    <h1 class="h1Reverse">Mes bibliothèques</h1>
+    <h1 class="h1Reverse">Mon gestionnaire de bibliothèque</h1>
 
     <div class="text-center libraries">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="#">
-                Créer une nouvelle Bibliothèque
+            <a href="{{ path('book') }}">
+                Mes livres possédés
             </a>
         </span>
     </div>
 
-    {% if libraries is defined %}
-        <h2 class="text-center">Mes bibliothèques</h2>
-        {% for library in libraries %}
-            <div class="text-center libraries">
-                <span class="badge badge-pill badge-light badgeUnit">
-                    <a href="{{ path('library', {'id':library.id}) }}">
-                        {{ library.name }}
-                    </a>
-                </span>
-            </div>
-        {% endfor %}
-    {% endif %}
+    <div class="text-center libraries">
+        <span class="badge badge-pill badge-light badgeUnit">
+            <a href="#">
+                Mes livres lus
+            </a>
+        </span>
+    </div>
+
+    <div class="text-center libraries">
+        <span class="badge badge-pill badge-light badgeUnit">
+            <a href="#">
+                Ma pile à lire
+            </a>
+        </span>
+    </div>
+
+    <div class="text-center libraries">
+        <span class="badge badge-pill badge-light badgeUnit">
+            <a href="#">
+                Mes achats prévus
+            </a>
+        </span>
+    </div>
 
 {% endblock %}
