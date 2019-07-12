@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layoutLibrary.html.twig' %}
 
 {% block title %}Bienvenue{% endblock %}
 
@@ -8,7 +8,7 @@
 
     <div class="text-center libraries">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book') }}">
+            <a href="{{ path('book_index') }}">
                 Mes livres possédés
             </a>
         </span>

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block body %}
+    <h1>Book</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th>ToBuy</th>
+                <td>{{ book.toBuy ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Owned</th>
+                <td>{{ book.owned ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IsRead</th>
+                <td>{{ book.isRead ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PublishingYear</th>
+                <td>{{ book.publishingYear }}</td>
+            </tr>
+            <tr>
+                <th>Format</th>
+                <td>{{ book.format }}</td>
+            </tr>
+            <tr>
+                <th>ISBN</th>
+                <td>{{ book.ISBN }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ book.price }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ book.summary }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('book_index') }}">back to list</a>
+
+    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+
+    {{ include('book/_delete_form.html.twig') }}
+{% endblock %}
