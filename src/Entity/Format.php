@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\StoragePlaceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FormatRepository")
  */
-class StoragePlace
+class Format
 {
     /**
      * @ORM\Id()
@@ -19,12 +19,12 @@ class StoragePlace
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    private $format;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="storagePlace")
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="format")
      */
     private $books;
 
@@ -38,14 +38,14 @@ class StoragePlace
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getFormat(): ?string
     {
-        return $this->name;
+        return $this->format;
     }
 
-    public function setName(string $name): self
+    public function setFormat(string $format): self
     {
-        $this->name = $name;
+        $this->format = $format;
 
         return $this;
     }
@@ -62,7 +62,7 @@ class StoragePlace
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
-            $book->setStoragePlace($this);
+            $book->setFormat($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class StoragePlace
         if ($this->books->contains($book)) {
             $this->books->removeElement($book);
             // set the owning side to null (unless already changed)
-            if ($book->getStoragePlace() === $this) {
-                $book->setStoragePlace(null);
+            if ($book->getFormat() === $this) {
+                $book->setFormat(null);
             }
         }
 

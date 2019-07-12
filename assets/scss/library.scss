@@ -61,3 +61,7 @@ a, a:hover {
   color: $lightColor;
   margin: 10vw;
 }
+
+.alert:empty {
+  display: none;
+}

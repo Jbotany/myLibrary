@@ -26,16 +26,6 @@ class Book
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $toBuy;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $owned;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
     private $isRead;
 
     /**
@@ -46,22 +36,7 @@ class Book
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $format;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
     private $ISBN;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $price;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\StoragePlace", inversedBy="books")
-     */
-    private $storagePlace;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Translator", inversedBy="books")
@@ -83,6 +58,11 @@ class Book
      */
     private $summary;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Format", inversedBy="books")
+     */
+    private $format;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -91,30 +71,6 @@ class Book
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getToBuy(): ?bool
-    {
-        return $this->toBuy;
-    }
-
-    public function setToBuy(?bool $toBuy): self
-    {
-        $this->toBuy = $toBuy;
-
-        return $this;
-    }
-
-    public function getOwned(): ?bool
-    {
-        return $this->owned;
-    }
-
-    public function setOwned(bool $owned): self
-    {
-        $this->owned = $owned;
-
-        return $this;
     }
 
     public function getIsRead(): ?bool
@@ -153,18 +109,6 @@ class Book
         return $this;
     }
 
-    public function getFormat(): ?string
-    {
-        return $this->format;
-    }
-
-    public function setFormat(?string $format): self
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
     public function getISBN(): ?string
     {
         return $this->ISBN;
@@ -173,30 +117,6 @@ class Book
     public function setISBN(string $ISBN): self
     {
         $this->ISBN = $ISBN;
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?float $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getStoragePlace(): ?StoragePlace
-    {
-        return $this->storagePlace;
-    }
-
-    public function setStoragePlace(?StoragePlace $storagePlace): self
-    {
-        $this->storagePlace = $storagePlace;
 
         return $this;
     }
@@ -259,6 +179,18 @@ class Book
     public function setSummary(?string $summary): self
     {
         $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getFormat(): ?Format
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?Format $format): self
+    {
+        $this->format = $format;
 
         return $this;
     }

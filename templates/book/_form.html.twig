@@ -1,4 +1,68 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.ISBN, 'ISBN') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.ISBN) }}</div>
+    {{ form_widget(form.ISBN, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.title, 'Titre') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.title) }}</div>
+    {{ form_widget(form.title, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.summary, 'Résumé') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.summary) }}</div>
+    {{ form_widget(form.summary, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.authors, 'Auteur') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.authors) }}</div>
+    {{ form_widget(form.authors, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.isRead, 'Lu') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.isRead) }}</div>
+    {{ form_widget(form.isRead, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.publisher, 'Editeur') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.publisher) }}</div>
+    {{ form_widget(form.publisher, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.publishingYear, 'Année de publication') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.publishingYear) }}</div>
+    {{ form_widget(form.publishingYear, {'attr':{'class':'w-100'}}) }}
+</div>
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.format, 'Format') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.format) }}</div>
+    {{ form_widget(form.format, {'attr':{'class':'w-100'}}) }}
+</div>
+
+    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}

@@ -2,8 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\Format;
+use App\Entity\Publisher;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,17 +19,30 @@ class BookType extends AbstractType
         $builder
             ->add('ISBN')
             ->add('title')
-            ->add('toBuy')
-            ->add('owned')
-            ->add('isRead')
-            ->add('publishingYear')
-            ->add('format')
-            ->add('price')
             ->add('summary')
-            ->add('storagePlace')
-            ->add('translator')
-            //->add('authors')
-            ->add('publisher')
+            ->add('authors', EntityType::class,[
+                'class' => Author::class,
+                'choice_label' => 'fullname',
+                'expanded' => true,
+                'multiple' => true,
+            ])
+            ->add('publishingYear')
+            ->add('isRead', ChoiceType::class, [
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+                'expanded' => true,
+                'multiple' => false,
+            ])
+            ->add('format', EntityType::class, [
+                'class' => Format::class,
+                'choice_label' => 'format'
+            ])
+            ->add('publisher', EntityType::class, [
+                'class' => Publisher::class,
+                'choice_label' => 'name'
+            ])
         ;
     }
 
