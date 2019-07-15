@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,6 +14,14 @@ class BookISBNType extends AbstractType
     {
         $builder
             ->add('ISBN')
+            ->add('isRead', ChoiceType::class, [
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+                'expanded' => true,
+                'multiple' => false,
+            ])
         ;
     }
 

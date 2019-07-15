@@ -7,5 +7,12 @@
     {{ form_widget(form.ISBN, {'attr':{'class':'w-100'}}) }}
 </div>
 
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.isRead, 'Lu') }}
+    </p>
+    {{ form_widget(form.isRead, {'attr':{'class':'w-100'}}) }}
+</div>
+
     <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}
