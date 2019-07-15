@@ -73,26 +73,30 @@ class BookController extends AbstractController
 
             $bookInfos = $apiGoogle->getAPIGoogleResult($isbn);
 
-            $title = $bookInfos['title'];
+            if (isset($bookInfos)) {
+                $title = $bookInfos['title'];
 
-            $bookAuthors->setAuthors($bookInfos['authors'], $authorRepository, $book);
+                $bookAuthors->setAuthors($bookInfos['authors'], $authorRepository, $book);
 
-            $publishedDate = $bookInfos['publishedDate'] ?? null;
-            $description = $bookInfos['description'] ?? null;
+                $publishedDate = $bookInfos['publishedDate'] ?? null;
+                $description = $bookInfos['description'] ?? null;
 
-            if (isset($bookInfos['publisher'])) {
-                $publisher = $bookInfos['publisher'];
-                $bookPublisher->setPublisher($publisher, $book);
+                if (isset($bookInfos['publisher'])) {
+                    $publisher = $bookInfos['publisher'];
+                    $bookPublisher->setPublisher($publisher, $book);
+                }
+
+                $book->setTitle($title);
+                $book->setPublishedAt($publishedDate);
+                $book->setSummary($description);
+
+                $entityManager->persist($book);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('book_index');
+            } else {
+                $this->addFlash('danger', 'ISBN inconnu');
             }
-
-            $book->setTitle($title);
-            $book->setPublishedAt($publishedDate);
-            $book->setSummary($description);
-
-            $entityManager->persist($book);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('book_index');
         }
 
         return $this->render('book/newISBN.html.twig', [
