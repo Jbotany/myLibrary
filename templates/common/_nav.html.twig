@@ -1,14 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Ma Bibliothèque</a>
+    <a class="navbar-brand" href="{{ path('welcome') }}">Ma Bibliothèque</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
-            <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            <a class="nav-item nav-link active" href="{{ path('welcome') }}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{{ path('book_index') }}">Mes livres</a>
+            <a class="nav-item nav-link" href="{{ path('book_newISBN') }}">Ajouter un livre</a>
+            <a class="nav-item nav-link" href="{{ path('book_unread') }}">Ma pile à lire</a>
+            <a class="nav-item nav-link" href="{{ path('book_read') }}">Mes livres lus</a>
         </div>
     </div>
 </nav>
