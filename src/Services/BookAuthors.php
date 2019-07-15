@@ -40,7 +40,7 @@ class BookAuthors
                 $newAuthor = new Author();
                 $newAuthor->setAuthor($author);
                 $this->em->persist($newAuthor);
-                $this->em->flush($newAuthor);
+                $this->em->flush();
             }
             $authors[] = $author;
         }

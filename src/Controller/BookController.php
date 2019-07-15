@@ -9,6 +9,7 @@ use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Services\APIGoogle;
 use App\Services\BookAuthors;
+use App\Services\BookPublisher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,7 +60,8 @@ class BookController extends AbstractController
         Request $request,
         AuthorRepository $authorRepository,
         APIGoogle $apiGoogle,
-        BookAuthors $bookAuthors): Response
+        BookAuthors $bookAuthors,
+        BookPublisher $bookPublisher): Response
     {
         $book = new Book();
         $form = $this->createForm(BookISBNType::class, $book);
@@ -75,13 +77,17 @@ class BookController extends AbstractController
 
             $bookAuthors->setAuthors($bookInfos['authors'], $authorRepository, $book);
 
-            $publishedDate = $bookInfos['publishedDate'];
-            $description = $bookInfos['description'];
-            //$publisher = $bookInfos['publisher'];
+            $publishedDate = $bookInfos['publishedDate'] ?? null;
+            $description = $bookInfos['description'] ?? null;
+
+            if (isset($bookInfos['publisher'])) {
+                $publisher = $bookInfos['publisher'];
+                $bookPublisher->setPublisher($publisher, $book);
+            }
 
             $book->setTitle($title);
             $book->setPublishedAt($publishedDate);
-            $book->setSummary($description);;
+            $book->setSummary($description);
 
             $entityManager->persist($book);
             $entityManager->flush();
