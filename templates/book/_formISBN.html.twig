@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+
+<div class="col-12">
+    <p class="mb-0">
+        {{ form_label(form.ISBN, 'ISBN') }}
+    </p>
+    <div class="alert alert-danger">{{ form_errors(form.ISBN) }}</div>
+    {{ form_widget(form.ISBN, {'attr':{'class':'w-100'}}) }}
+</div>
+
+    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

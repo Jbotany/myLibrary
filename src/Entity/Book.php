@@ -29,11 +29,6 @@ class Book
     private $isRead;
 
     /**
-     * @ORM\Column(type="string", length=4, nullable=true)
-     */
-    private $publishingYear;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $ISBN;
@@ -62,6 +57,11 @@ class Book
      * @ORM\ManyToOne(targetEntity="App\Entity\Format", inversedBy="books")
      */
     private $format;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $publishedAt;
 
     public function __construct()
     {
@@ -93,18 +93,6 @@ class Book
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getPublishingYear(): ?string
-    {
-        return $this->publishingYear;
-    }
-
-    public function setPublishingYear(?string $publishingYear): self
-    {
-        $this->publishingYear = $publishingYear;
 
         return $this;
     }
@@ -191,6 +179,18 @@ class Book
     public function setFormat(?Format $format): self
     {
         $this->format = $format;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?string
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?string $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

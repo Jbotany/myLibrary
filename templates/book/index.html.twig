@@ -7,7 +7,7 @@
 
     <div class="text-center badges">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="#">
+            <a href="{{ path('book_newISBN') }}">
                 Ajouter un livre par son ISBN
             </a>
         </span>
@@ -33,7 +33,7 @@
                             {{ book.title }}
                             <br>
                             {% for author in book.authors %}
-                                {{ author.firstname ~ ' ' ~ author.lastname }}
+                                {{ author.author }} {{ not loop.last ? ', ' }}
                             {% endfor %}
                         </div>
                     </div>

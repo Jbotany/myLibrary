@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookISBNType;
 use App\Form\BookType;
+use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
+use App\Services\APIGoogle;
+use App\Services\BookAuthors;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,6 +53,50 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/newISBN", name="book_newISBN", methods={"GET","POST"})
+     */
+    public function newISBN(
+        Request $request,
+        AuthorRepository $authorRepository,
+        APIGoogle $apiGoogle,
+        BookAuthors $bookAuthors): Response
+    {
+        $book = new Book();
+        $form = $this->createForm(BookISBNType::class, $book);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $isbn = $form->getData()->getISBN();
+
+            $bookInfos = $apiGoogle->getAPIGoogleResult($isbn);
+
+            $title = $bookInfos['title'];
+
+            $bookAuthors->setAuthors($bookInfos['authors'], $authorRepository, $book);
+
+            $publishedDate = $bookInfos['publishedDate'];
+            $description = $bookInfos['description'];
+            //$publisher = $bookInfos['publisher'];
+
+            $book->setTitle($title);
+            $book->setPublishedAt($publishedDate);
+            $book->setSummary($description);;
+
+            $entityManager->persist($book);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('book_index');
+        }
+
+        return $this->render('book/newISBN.html.twig', [
+            'book' => $book,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
      * @Route("/{id}", name="book_show", methods={"GET"})
      */
     public function show(Book $book): Response
@@ -85,7 +133,7 @@ class BookController extends AbstractController
      */
     public function delete(Request $request, Book $book): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $book->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($book);
             $entityManager->flush();
