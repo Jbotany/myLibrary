@@ -111,7 +111,17 @@ class BookController extends AbstractController
     public function showUnread(BookRepository $bookRepository): Response
     {
         return $this->render('book/unread.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'books' => $bookRepository->findBy(['isRead' => false]),
+        ]);
+    }
+
+    /**
+     * @Route("/read", name="book_read", methods={"GET"})
+     */
+    public function showRead(BookRepository $bookRepository): Response
+    {
+        return $this->render('book/read.html.twig', [
+            'books' => $bookRepository->findBy(['isRead' => true]),
         ]);
     }
 

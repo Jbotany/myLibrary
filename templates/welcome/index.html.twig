@@ -16,18 +16,20 @@
 
     <div class="text-center libraries">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="#">
-                Mes livres lus
+            <a href="{{ path('book_unread') }}">
+                Ma pile à lire
             </a>
         </span>
     </div>
 
     <div class="text-center libraries">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book_unread') }}">
-                Ma pile à lire
+            <a href="{{ path('book_read') }}">
+                Mes livres lus
             </a>
         </span>
     </div>
+
+
 
 {% endblock %}
