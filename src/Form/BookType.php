@@ -22,11 +22,11 @@ class BookType extends AbstractType
             ->add('summary')
             ->add('authors', EntityType::class,[
                 'class' => Author::class,
-                'choice_label' => 'fullname',
+                'choice_label' => 'author',
                 'expanded' => true,
                 'multiple' => true,
             ])
-            ->add('publishingYear')
+            ->add('publishedAt')
             ->add('isRead', ChoiceType::class, [
                 'choices' => [
                     'Oui' => true,
@@ -41,7 +41,8 @@ class BookType extends AbstractType
             ])
             ->add('publisher', EntityType::class, [
                 'class' => Publisher::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez un éditeur'
             ])
         ;
     }
