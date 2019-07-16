@@ -33,9 +33,7 @@
                             <div class="col-10">
                                 {{ book.title }}
                                 <br>
-                                {% for author in book.authors %}
-                                    {{ author.author }} {{ not loop.last ? ', ' }}
-                                {% endfor %}
+                                {{ include('book/_authorDisplay.html.twig') }}
                             </div>
                         </div>
                     </div>

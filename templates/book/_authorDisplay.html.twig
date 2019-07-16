@@ -1,0 +1,3 @@
+{% for author in book.authors %}
+    {{ author.author }} {{ not loop.last ? ', ' }}
+{% endfor %}

@@ -6,9 +6,11 @@ use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Format;
 use App\Entity\Publisher;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,11 +22,8 @@ class BookType extends AbstractType
             ->add('ISBN')
             ->add('title')
             ->add('summary')
-            ->add('authors', EntityType::class,[
-                'class' => Author::class,
-                'choice_label' => 'author',
-                'expanded' => true,
-                'multiple' => true,
+            ->add('authors', CollectionType::class,[
+                'allow_add'=> true,
             ])
             ->add('publishedAt')
             ->add('isRead', ChoiceType::class, [

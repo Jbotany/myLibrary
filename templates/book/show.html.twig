@@ -16,6 +16,12 @@
                 <td>{{ book.isRead ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
+                <th>Auteurs</th>
+                <td>
+                    {{ include('book/_authorDisplay.html.twig') }}
+                </td>
+            </tr>
+            <tr>
                 <th>Date de publication</th>
                 <td>{{ book.publishedAt }}</td>
             </tr>
@@ -27,6 +33,8 @@
                 <th>Résumé</th>
                 <td>{{ book.summary }}</td>
             </tr>
+
+
         </tbody>
     </table>
 
