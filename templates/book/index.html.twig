@@ -3,18 +3,18 @@
 {% block title %}Mes livres{% endblock %}
 
 {% block body %}
-    <h1 class="h1">Mes livres</h1>
+    <h1>Mes livres</h1>
 
     <div class="text-center badges">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book_newISBN') }}">
+            <a class="aIndex" href="{{ path('book_newISBN') }}">
                 Ajouter un livre par son ISBN
             </a>
         </span>
     </div>
 
     <div class="text-center badges">
-        <span class="badge badge-pill badge-light badgeUnit">
+        <span class="aIndex" class="badge badge-pill badge-light badgeUnit">
             <a href="{{ path('book_new') }}">
                 Ajouter un livre sans ISBN
             </a>
@@ -23,22 +23,24 @@
 
     {% if books is defined %}
         {% for book in books %}
-            <div class="card border cardBook">
-                <div class="card-body textClass">
-                    <div class="row">
-                        <div class="col-2">
-                            pic
-                        </div>
-                        <div class="col-10">
-                            {{ book.title }}
-                            <br>
-                            {% for author in book.authors %}
-                                {{ author.author }} {{ not loop.last ? ', ' }}
-                            {% endfor %}
+            <a class="aBook" href="{{ path('book_show',{'id':book.id}) }}">
+                <div class="card border cardBook">
+                    <div class="card-body textClass">
+                        <div class="row">
+                            <div class="col-2">
+                                pic
+                            </div>
+                            <div class="col-10">
+                                {{ book.title }}
+                                <br>
+                                {% for author in book.authors %}
+                                    {{ author.author }} {{ not loop.last ? ', ' }}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         {% endfor %}
     {% endif %}
 

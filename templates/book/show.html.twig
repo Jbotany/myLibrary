@@ -1,50 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'layoutLibrary.html.twig' %}
 
 {% block title %}Book{% endblock %}
 
 {% block body %}
-    <h1>Book</h1>
+    <h1>{{ book.title }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ book.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ book.title }}</td>
             </tr>
             <tr>
-                <th>ToBuy</th>
-                <td>{{ book.toBuy ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Owned</th>
-                <td>{{ book.owned ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>IsRead</th>
+                <th>Lu</th>
                 <td>{{ book.isRead ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>PublishingYear</th>
-                <td>{{ book.publishingYear }}</td>
-            </tr>
-            <tr>
-                <th>Format</th>
-                <td>{{ book.format }}</td>
+                <th>Date de publication</th>
+                <td>{{ book.publishedAt }}</td>
             </tr>
             <tr>
                 <th>ISBN</th>
                 <td>{{ book.ISBN }}</td>
             </tr>
             <tr>
-                <th>Price</th>
-                <td>{{ book.price }}</td>
-            </tr>
-            <tr>
-                <th>Summary</th>
+                <th>Résumé</th>
                 <td>{{ book.summary }}</td>
             </tr>
         </tbody>

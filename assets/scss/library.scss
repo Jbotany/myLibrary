@@ -6,9 +6,6 @@ h1 {
   padding-bottom: 5vw;
   padding-top: 5vw;
   text-align: center;
-}
-
-.h1 {
   background-color: $lightColor;
   color: $darkColor;
 }
@@ -48,9 +45,14 @@ p, .textClass {
   padding: 3vw;
 }
 
-a, a:hover {
+.aIndex, .aIndex:hover {
   text-decoration: none;
   color: $lightColor;
+}
+
+.aBook, .aBook:hover {
+  text-decoration: none;
+  color: $darkColor;
 }
 
 .libraries {
