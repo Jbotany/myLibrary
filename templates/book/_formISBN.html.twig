@@ -1,18 +1,21 @@
 {{ form_start(form) }}
 
-<div class="col-12">
+<div class="col-12 pb-3">
     <p class="mb-0">
         {{ form_label(form.ISBN, 'ISBN') }}
     </p>
     {{ form_widget(form.ISBN, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 pb-3">
     <p class="mb-0">
         {{ form_label(form.isRead, 'Lu') }}
     </p>
     {{ form_widget(form.isRead, {'attr':{'class':'w-100'}}) }}
 </div>
+<div class="text-center mt-3">
+    <button class="btn mr-5">{{ button_label|default('Ajouter') }}</button>
 
-    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+    <a class="btn" href="{{ path('book_index') }}">Retour</a>
+</div>
 {{ form_end(form) }}

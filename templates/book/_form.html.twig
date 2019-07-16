@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.ISBN, 'ISBN') }}
     </p>
@@ -8,7 +8,7 @@
     {{ form_widget(form.ISBN, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.title, 'Titre') }}
     </p>
@@ -16,7 +16,7 @@
     {{ form_widget(form.title, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.summary, 'Résumé') }}
     </p>
@@ -24,7 +24,7 @@
     {{ form_widget(form.summary, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.authors, 'Auteurs') }}
     </p>
@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.isRead, 'Lu') }}
     </p>
@@ -44,7 +44,7 @@
     {{ form_widget(form.isRead, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.publisher, 'Editeur') }}
     </p>
@@ -52,7 +52,7 @@
     {{ form_widget(form.publisher, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.publishedAt, 'Année de publication') }}
     </p>
@@ -60,7 +60,7 @@
     {{ form_widget(form.publishedAt, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<div class="col-12">
+<div class="col-12 formBook">
     <p class="mb-0">
         {{ form_label(form.format, 'Format') }}
     </p>

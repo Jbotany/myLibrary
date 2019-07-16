@@ -4,21 +4,22 @@
 
 {% block body %}
     <h1>Mes livres</h1>
-
-    <div class="text-center badges">
+    <div class="container-fluid">
+        <div class="text-center">
         <span class="badge badge-pill badge-light badgeUnit">
             <a class="aIndex" href="{{ path('book_newISBN') }}">
                 Ajouter un livre par son ISBN
             </a>
         </span>
-    </div>
+        </div>
 
-    <div class="text-center badges">
-        <span class="aIndex" class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book_new') }}">
+        <div class="text-center">
+        <span class="badge badge-pill badge-light badgeUnit">
+            <a class="aIndex" href="{{ path('book_new') }}">
                 Ajouter un livre sans ISBN
             </a>
         </span>
+        </div>
     </div>
 
     {% if books is defined %}
@@ -41,5 +42,4 @@
             </a>
         {% endfor %}
     {% endif %}
-
 {% endblock %}

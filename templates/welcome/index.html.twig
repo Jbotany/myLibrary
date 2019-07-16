@@ -4,32 +4,32 @@
 
 {% block body %}
 
-    <h1 class="h1Reverse">Mon gestionnaire de bibliothèque</h1>
-
-    <div class="text-center libraries">
+    <h1 class="">Gérer mes ouvrages</h1>
+    <div class="container-fluid">
+        <div class="text-center badgeParent">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book_index') }}">
+            <a class="aIndex" href="{{ path('book_index') }}">
                 Mes livres possédés
             </a>
         </span>
-    </div>
+        </div>
 
-    <div class="text-center libraries">
+        <div class="text-center">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book_unread') }}">
+            <a class="aIndex" href="{{ path('book_unread') }}">
                 Ma pile à lire
             </a>
         </span>
-    </div>
+        </div>
 
-    <div class="text-center libraries">
+        <div class="text-center">
         <span class="badge badge-pill badge-light badgeUnit">
-            <a href="{{ path('book_read') }}">
+            <a class="aIndex" href="{{ path('book_read') }}">
                 Mes livres lus
             </a>
         </span>
+        </div>
+
     </div>
-
-
 
 {% endblock %}

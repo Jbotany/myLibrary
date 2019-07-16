@@ -1,14 +1,16 @@
-h1, h2, h3 {
+h1, h2, h3, .navbar-brand {
   font-family: $titleFont, serif;
 }
 
 h1 {
-  padding-bottom: 5vw;
-  padding-top: 5vw;
+  padding-bottom: 10vw;
+  padding-top: 10vw;
   text-align: center;
-  font-size: 2rem;
-  background-color: $lightColor;
+  font-size: 7vw;
   color: $darkColor;
+  margin-bottom: 10vw;
+  background-image: url("../img/bg.png");
+  background-color: $lightColor;
 }
 
 .h1Reverse {
@@ -16,19 +18,18 @@ h1 {
   color: $lightColor;
 }
 
-p, .textClass {
+p, .textClass, label {
   font-family: $textFont, sans-serif;
+}
+
+.navbar {
+  background-color: $darkColor;
 }
 
 .cardBook {
   margin-bottom: 2vw;
   border: solid $darkColor 1vw;
   background-color: $lightColorSecondary;
-}
-
-.navbar {
-  background-color: $darkColor;
-  color: $darkColor;
 }
 
 .badges {
@@ -38,33 +39,48 @@ p, .textClass {
 }
 
 .badgeUnit {
-  margin-left: 3vw;
-  margin-right: 3vw;
-  width: 80vw;
   background-color: $darkColor;
   color: $lightColor;
-  padding: 3vw;
+  height: 10vw;
+  font-size: 1rem;
+  margin-top: 7vw;
+  margin-bottom: 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .aIndex, .aIndex:hover {
   text-decoration: none;
-  color: $lightColor;
+  color: $lightColorTertiary;
+  font-family: $textFont, sans-serif;
 }
 
 .aBook, .aBook:hover {
   text-decoration: none;
   color: $darkColor;
-}
-
-.libraries {
-  text-align: center;
-  justify-content: center;
-  width: 80vw;
-  background-color: $darkColor;
-  color: $lightColor;
-  margin: 10vw;
+  font-family: $textFont, sans-serif;
 }
 
 .alert:empty {
   display: none;
+}
+
+label, legend {
+  color: $darkColor;
+}
+
+#book_isbn_isRead > .form-check, #book_isRead > .form-check {
+  display: inline-block;
+  margin-right: 5vw;
+}
+
+.btn {
+  background-color: $darkColor;
+  color: $lightColorTertiary;
+}
+
+.formBook {
+  margin-top: 5vw;
+  margin-bottom: 5vw;
 }
