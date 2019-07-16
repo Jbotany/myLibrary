@@ -8,6 +8,7 @@ use App\Form\BookType;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Services\APIGoogle;
+use App\Services\APIOpenLibrary;
 use App\Services\BookAuthors;
 use App\Services\BookPublisher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +62,9 @@ class BookController extends AbstractController
         AuthorRepository $authorRepository,
         APIGoogle $apiGoogle,
         BookAuthors $bookAuthors,
-        BookPublisher $bookPublisher): Response
+        BookPublisher $bookPublisher,
+        APIOpenLibrary $openLibrary
+    ): Response
     {
         $book = new Book();
         $form = $this->createForm(BookISBNType::class, $book);
@@ -72,6 +75,7 @@ class BookController extends AbstractController
             $isbn = $form->getData()->getISBN();
 
             $bookInfos = $apiGoogle->getAPIGoogleResult($isbn);
+            $bookInfosOL = $openLibrary->getAPIOpenLibraryResults($isbn);
 
             if (isset($bookInfos)) {
                 $title = $bookInfos['title'];
