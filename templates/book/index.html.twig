@@ -20,26 +20,33 @@
             </a>
         </span>
         </div>
-    </div>
 
-    {% if books is defined %}
-        {% for book in books %}
-            <a class="aBook" href="{{ path('book_show',{'id':book.id}) }}">
-                <div class="card border cardBook">
-                    <div class="card-body textClass">
-                        <div class="row">
-                            <div class="col-2">
-                                pic
-                            </div>
-                            <div class="col-10">
-                                {{ book.title }}
-                                <br>
-                                {{ include('book/_authorDisplay.html.twig') }}
+        {% if books is defined %}
+            {% set previous = false %}
+            {% for book in books %}
+                {% if book.title|first != previous %}
+                    <div class="ml-2 textClass textColor">
+                        {{ book.title|first }}
+                    </div>
+                {% endif %}
+                {% set previous = book.title|first %}
+                <a class="aBook" href="{{ path('book_show',{'id':book.id}) }}">
+                    <div class="card border cardBook">
+                        <div class="card-body textClass">
+                            <div class="row">
+                                <div class="col-2">
+                                    pic
+                                </div>
+                                <div class="col-10">
+                                    {{ book.title }}
+                                    <br>
+                                    {{ include('book/_authorDisplay.html.twig') }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        {% endfor %}
-    {% endif %}
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

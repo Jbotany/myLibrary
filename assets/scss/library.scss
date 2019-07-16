@@ -9,7 +9,7 @@ h1 {
   font-size: 7vw;
   color: $darkColor;
   margin-bottom: 10vw;
-  background-image: url("../img/bg.png");
+  background-image: url("../img/natural-paper.png");
   background-color: $lightColor;
 }
 
@@ -18,7 +18,7 @@ h1 {
   color: $lightColor;
 }
 
-p, .textClass, label {
+p, .textClass, label, legend {
   font-family: $textFont, sans-serif;
 }
 
@@ -83,4 +83,8 @@ label, legend {
 .formBook {
   margin-top: 5vw;
   margin-bottom: 5vw;
+}
+
+.textColor {
+  color: $darkColor;
 }

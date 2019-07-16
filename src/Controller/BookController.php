@@ -27,7 +27,7 @@ class BookController extends AbstractController
     public function index(BookRepository $bookRepository): Response
     {
         return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'books' => $bookRepository->findBy([],['title'=> 'ASC']),
         ]);
     }
 
@@ -76,6 +76,8 @@ class BookController extends AbstractController
 
             $bookInfos = $apiGoogle->getAPIGoogleResult($isbn);
             $bookInfosOL = $openLibrary->getAPIOpenLibraryResults($isbn);
+//isbndb autre API
+
 
             if (isset($bookInfos)) {
                 $title = $bookInfos['title'];
