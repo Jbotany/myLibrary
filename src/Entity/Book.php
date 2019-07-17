@@ -44,7 +44,7 @@ class Book
     private $translator;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books", cascade={"persist"})
      */
     private $authors;
 
@@ -97,7 +97,7 @@ class Book
 
     public function setTitle(string $title): self
     {
-        $this->title = $title;
+        $this->title = ucfirst($title);
 
         return $this;
     }

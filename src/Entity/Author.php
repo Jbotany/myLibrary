@@ -34,7 +34,7 @@ class Author
     private $pseudo;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="author")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="author", cascade={"persist"})
      */
     private $books;
 

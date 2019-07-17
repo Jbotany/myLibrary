@@ -6,11 +6,12 @@ use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Format;
 use App\Entity\Publisher;
-use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +24,10 @@ class BookType extends AbstractType
             ->add('title')
             ->add('summary')
             ->add('authors', CollectionType::class,[
+                'entry_type' => AuthorType::class,
+                'required' => false,
                 'allow_add'=> true,
+                'prototype' => true,
             ])
             ->add('publishedAt')
             ->add('isRead', ChoiceType::class, [
@@ -36,12 +40,14 @@ class BookType extends AbstractType
             ])
             ->add('format', EntityType::class, [
                 'class' => Format::class,
-                'choice_label' => 'format'
+                'choice_label' => 'format',
+                'required' => false,
             ])
             ->add('publisher', EntityType::class, [
                 'class' => Publisher::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choisissez un éditeur'
+                'placeholder' => 'Choisissez un éditeur',
+                'required' => false,
             ])
         ;
     }

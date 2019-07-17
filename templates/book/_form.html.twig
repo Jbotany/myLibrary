@@ -31,6 +31,28 @@
     <div class="row">
         <div class="col-6">
             <div class="alert alert-danger">{{ form_errors(form.authors) }}</div>
+
+            {# store the prototype on the data-prototype attribute #}
+            <ul class="col-12" id="author-fields-list"
+                data-prototype="{{ form_widget(form.authors.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ form.children|length }}">
+                {% for author in form.authors %}
+                    <li class="liAuthor mb-2">
+                        {{ form_errors(author) }}
+                        {{ form_widget(author) }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <button type="button"
+                    class="add-another-collection-widget"
+                    data-list-selector="#author-fields-list">Ajouter un auteur</button>
+
+
+
+
+
             {{ form_widget(form.authors, {'attr':{'class':'w-100'}}) }}
         </div>
     </div>
