@@ -1,4 +1,4 @@
-h1, h2, h3, .navbar-brand {
+h1, h2, h3 {
   font-family: $titleFont, serif;
 }
 
@@ -6,10 +6,10 @@ h1 {
   padding-bottom: 10vw;
   padding-top: 10vw;
   text-align: center;
-  font-size: 7vw;
+  font-size: 10vw;
   color: $darkColor;
   margin-bottom: 10vw;
-  background-image: url("../img/natural-paper.png");
+  background-image: url("../img/bg.png");
   background-color: $lightColor;
 }
 
@@ -18,7 +18,7 @@ h1 {
   color: $lightColor;
 }
 
-p, .textClass, label, legend {
+p, .textClass, label, legend, .navbar-brand {
   font-family: $textFont, sans-serif;
 }
 

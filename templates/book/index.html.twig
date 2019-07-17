@@ -16,7 +16,7 @@
         <div class="text-center">
         <span class="badge badge-pill badge-light badgeUnit">
             <a class="aIndex" href="{{ path('book_new') }}">
-                Ajouter un livre sans ISBN
+                Ajouter un livre manuellement
             </a>
         </span>
         </div>
@@ -38,7 +38,7 @@
                                     pic
                                 </div>
                                 <div class="col-10">
-                                    {{ book.title }}
+                                    <span class="textColor">{{ book.title }}</span>
                                     <br>
                                     {{ include('book/_authorDisplay.html.twig') }}
                                 </div>
