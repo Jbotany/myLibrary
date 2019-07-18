@@ -22,6 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BookController extends AbstractController
 {
+    const COVERPLACEHOLDER = "https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png";
+
     /**
      * @Route("/", name="book_index", methods={"GET"})
      */
@@ -94,7 +96,13 @@ class BookController extends AbstractController
                 $book->setTitle($title);
                 $book->setPublishedAt($publishedAt);
                 $book->setSummary($description);
-                $book->setCover($cover);
+
+                if ($cover) {
+                    $book->setCover($cover);
+                } else {
+                    $book->setCover(self::COVERPLACEHOLDER);
+                }
+
 
                 $entityManager->persist($book);
                 $entityManager->flush();
