@@ -27,7 +27,9 @@ class APIMixer
 
         foreach ($apiResults as $tables) {
             foreach ($tables as $key => $value) {
-                if (!array_key_exists($key, $results) || ($key != 'authors' && (strlen($results[$key]) < strlen($value)))) {
+                if (!array_key_exists($key, $results) ||
+                    ($key != 'authors' && (strlen($results[$key]) < strlen($value))) ||
+                    ($key === 'authors' && count($results[$key]) < count($value))) {
                     $results[$key] = $value;
                 }
             }

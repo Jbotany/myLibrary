@@ -12,9 +12,15 @@ class APIGoogle
 
         $response = file_get_contents($googleAPIRequest);
 
-        $results = json_decode($response, true);
+        $jsonResults = [];
 
-        return self::orderInRightFormat($results['items'][0]['volumeInfo']);
+        if ($response != '{}') {
+            $jsonResults = json_decode($response, true);
+        } else {
+            $jsonResults['items'][0]['volumeInfo'] = [];
+        }
+
+        return self::orderInRightFormat($jsonResults['items'][0]['volumeInfo']);
     }
 
     private function orderInRightFormat(array $data): array
@@ -22,8 +28,10 @@ class APIGoogle
         $results['title'] = $data['title'] ?? null;
 
         $results['authors'] = [];
-        foreach ($data['authors'] as $detail) {
-            $results['authors'][] = $detail['name'] ?? '';
+        if (isset($data['authors'])) {
+            foreach ($data['authors'] as $detail) {
+                $results['authors'][] = $detail ?? '';
+            }
         }
 
         $results['publisher'] = $data['publishers'] ?? '';
