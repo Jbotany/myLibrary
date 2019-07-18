@@ -8,6 +8,7 @@ use App\Form\BookType;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Services\APIGoogle;
+use App\Services\APIMixer;
 use App\Services\APIOpenLibrary;
 use App\Services\BookAuthors;
 use App\Services\BookPublisher;
@@ -61,10 +62,9 @@ class BookController extends AbstractController
     public function newISBN(
         Request $request,
         AuthorRepository $authorRepository,
-        APIGoogle $apiGoogle,
         BookAuthors $bookAuthors,
         BookPublisher $bookPublisher,
-        APIOpenLibrary $openLibrary
+        APIMixer $APIMixer
     ): Response
     {
         $book = new Book();
@@ -75,18 +75,16 @@ class BookController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $isbn = $form->getData()->getISBN();
 
-            $bookInfos = $apiGoogle->getAPIGoogleResult($isbn);
-            $bookInfosOL = $openLibrary->getAPIOpenLibraryResults($isbn);
-//isbndb autre API
+            $bookInfos = $APIMixer->mixAPIResults($isbn);
 
-
-            if (isset($bookInfos)) {
+            if (!empty($bookInfos)) {
                 $title = $bookInfos['title'];
 
                 $bookAuthors->setAuthors($bookInfos['authors'], $authorRepository, $book);
 
-                $publishedDate = $bookInfos['publishedDate'] ?? null;
+                $publishedAt = $bookInfos['publishedAt'] ?? null;
                 $description = $bookInfos['description'] ?? null;
+                $cover = $bookInfos['cover'] ?? null;
 
                 if (isset($bookInfos['publisher'])) {
                     $publisher = $bookInfos['publisher'];
@@ -94,8 +92,9 @@ class BookController extends AbstractController
                 }
 
                 $book->setTitle($title);
-                $book->setPublishedAt($publishedDate);
+                $book->setPublishedAt($publishedAt);
                 $book->setSummary($description);
+                $book->setCover($cover);
 
                 $entityManager->persist($book);
                 $entityManager->flush();

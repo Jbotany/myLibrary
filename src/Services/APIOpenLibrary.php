@@ -6,7 +6,7 @@ namespace App\Services;
 
 class APIOpenLibrary
 {
-    public function getAPIOpenLibraryResults(string $isbn): ?array
+    public function getAPIOpenLibraryResults(string $isbn): array
     {
         $request = "https://openlibrary.org/api/books?bibkeys=ISBN:$isbn&format=json&jscmd=data";
 
@@ -14,30 +14,24 @@ class APIOpenLibrary
 
         $jsonResults = json_decode($response, true);
 
-        $results = self::orderInRightFormat($jsonResults["ISBN:$isbn"]);
-
-        return $results ?? null;
+        return self::orderInRightFormat($jsonResults["ISBN:$isbn"]);
     }
 
 
     private function orderInRightFormat(array $data): array
     {
-        $results['title'] = $data['title'] ?? null;
+        $results['title'] = $data['title'] ?? '';
 
         $results['authors'] = [];
-
         foreach ($data['authors'] as $detail) {
-            $results['authors'][] = $detail['name'] ?? null;
+            $results['authors'][] = $detail['name'] ?? '';
         }
 
-        $results['publisher'] = $data['publishers'][0] ?? null;
-
-        $results['cover'] = $data['cover']['small'] ?? null;
-
-        $results['publishedAt'] = $data['publish_date'] ?? null;
+        $results['publisher'] = $data['publishers'][0]['name'] ?? '';
+        $results['cover'] = $data['cover']['small'] ?? '';
+        $results['publishedAt'] = $data['publish_date'] ?? '';
+        $results['description'] = $data['description'] ?? '';
 
         return $results;
     }
-
-
 }

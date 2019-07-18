@@ -68,6 +68,11 @@ class Book
      */
     private $publishedAt;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $cover;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -196,6 +201,18 @@ class Book
     public function setPublishedAt(?string $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?string $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }
