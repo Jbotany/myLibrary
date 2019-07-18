@@ -12,7 +12,13 @@ class APIOpenLibrary
 
         $response = file_get_contents($request);
 
-        $jsonResults = json_decode($response, true);
+        $jsonResults = [];
+
+        if ($response != '{}') {
+            $jsonResults = json_decode($response, true);
+        } else {
+            $jsonResults["ISBN:$isbn"] = [];
+        }
 
         return self::orderInRightFormat($jsonResults["ISBN:$isbn"]);
     }
@@ -23,9 +29,12 @@ class APIOpenLibrary
         $results['title'] = $data['title'] ?? '';
 
         $results['authors'] = [];
-        foreach ($data['authors'] as $detail) {
-            $results['authors'][] = $detail['name'] ?? '';
+        if (isset($data['authors'])) {
+            foreach ($data['authors'] as $detail) {
+                $results['authors'][] = $detail['name'] ?? '';
+            }
         }
+
 
         $results['publisher'] = $data['publishers'][0]['name'] ?? '';
         $results['cover'] = $data['cover']['small'] ?? '';
