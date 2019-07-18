@@ -47,10 +47,8 @@
 
             <button type="button"
                     class="add-another-collection-widget"
-                    data-list-selector="#author-fields-list">Ajouter un auteur</button>
-
-
-
+                    data-list-selector="#author-fields-list">Ajouter un auteur
+            </button>
 
 
             {{ form_widget(form.authors, {'attr':{'class':'w-100'}}) }}
@@ -90,5 +88,7 @@
     {{ form_widget(form.format, {'attr':{'class':'w-100'}}) }}
 </div>
 
-<button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+<div class="text-center mt-3">
+    <button class="btn">{{ button_label|default('Ajouter') }}</button>
+</div>
 {{ form_end(form) }}
