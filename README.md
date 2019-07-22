@@ -3,6 +3,8 @@ Thanks for taking interest to this project. It is a student work from my learn a
 The purpose of this application is to manage your own library. 
 The site is developed for mobile use only.
 
+I hope you'll enjoy it !
+
 ## Getting Started
 
 ### Prerequisites
@@ -34,8 +36,6 @@ Replace `db_name` with your choice of name for the database.
 5. Run `php bin/console doctrine:migrations:migrate` this will INSERT the minimum of data needed to make the database work
 6. Run the command `yarn encore prod`
 7. Use the application
-
-I hope you'll enjoy it !
 
 ## Built With
 
