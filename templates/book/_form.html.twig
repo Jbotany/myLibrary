@@ -89,6 +89,7 @@
 </div>
 
 <div class="text-center mt-3">
-    <button class="btn">{{ button_label|default('Ajouter') }}</button>
+    <button class="btn mr-5">{{ button_label|default('Ajouter') }}</button>
+    <a class="btn" href="{{ path('book_index') }}">Retour</a>
 </div>
 {{ form_end(form) }}
