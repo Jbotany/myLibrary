@@ -14,3 +14,4 @@ require('../scss/app.scss');
 const $ = require('jquery');
 global.$ = global.jQuery = $;
 require('bootstrap');
+require('@fortawesome/fontawesome-free/css/all.min.css');

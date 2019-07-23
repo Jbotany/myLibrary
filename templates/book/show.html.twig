@@ -7,32 +7,34 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Titre</th>
-                <td>{{ book.title }}</td>
-            </tr>
-            <tr>
-                <th>Lu</th>
-                <td>{{ book.isRead ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Auteurs</th>
-                <td>
-                    {{ include('book/_authorDisplay.html.twig') }}
-                </td>
-            </tr>
-            <tr>
-                <th>Date de publication</th>
-                <td>{{ book.publishedAt }}</td>
-            </tr>
-            <tr>
-                <th>ISBN</th>
-                <td>{{ book.ISBN }}</td>
-            </tr>
-            <tr>
-                <th>Résumé</th>
-                <td>{{ book.summary }}</td>
-            </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ book.title }}</td>
+        </tr>
+        <tr>
+            <th>Lu</th>
+            <td>
+                {{ include('book/_isReadDisplay.html.twig') }}
+            </td>
+        </tr>
+        <tr>
+            <th>Auteurs</th>
+            <td>
+                {{ include('book/_authorDisplay.html.twig') }}
+            </td>
+        </tr>
+        <tr>
+            <th>Date de publication</th>
+            <td>{{ book.publishedAt }}</td>
+        </tr>
+        <tr>
+            <th>ISBN</th>
+            <td>{{ book.ISBN }}</td>
+        </tr>
+        <tr>
+            <th>Résumé</th>
+            <td>{{ book.summary }}</td>
+        </tr>
 
 
         </tbody>
