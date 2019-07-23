@@ -1,20 +1,30 @@
 {% if books is defined %}
+    {% set previous = false %}
     {% for book in books %}
-        <div class="card border cardBook">
-            <div class="card-body textClass">
-                <div class="row">
-                    <div class="col-2">
-                        pic
-                    </div>
-                    <div class="col-10">
-                        {{ book.title }}
-                        <br>
-                        {% for author in book.authors %}
-                            {{ author.author }} {{ not loop.last ? ', ' }}
-                        {% endfor %}
+        {% if book.title|first != previous %}
+            <div class="ml-2 textClass textColor">
+                {{ book.title|first }}
+            </div>
+        {% endif %}
+        {% set previous = book.title|first %}
+        <a class="aBook" href="{{ path('book_show',{'id':book.id}) }}">
+            <div class="card border cardBook">
+                <div class="card-body textClass">
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="coverClass" src="{{ book.cover }}" alt="Couv" />
+                        </div>
+                        <div class="col-9">
+                            <span class="textColor">{{ book.title }}</span>
+                            <br>
+                            {{ include('book/_authorDisplay.html.twig') }}
+                        </div>
+                        <div class="col-1">
+                            {{ include('book/_isReadDisplay.html.twig') }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     {% endfor %}
 {% endif %}
