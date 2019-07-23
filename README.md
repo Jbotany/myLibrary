@@ -3,6 +3,8 @@ Thanks for taking interest to this project. It is a student work from my learn a
 The purpose of this application is to manage your own library. 
 The site is developed for mobile use only.
 
+This app' is connected with Google Books API and Open Library API.
+
 I hope you'll enjoy it !
 
 ## Getting Started
