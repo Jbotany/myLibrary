@@ -4,18 +4,24 @@
 namespace App\Services;
 
 
+use Symfony\Component\HttpClient\HttpClient;
+
 class APIOpenLibrary
 {
     public function getAPIOpenLibraryResults(string $isbn): array
     {
+        $httpClient = HttpClient::create();
+
         $request = "https://openlibrary.org/api/books?bibkeys=ISBN:$isbn&format=json&jscmd=data";
 
-        $response = file_get_contents($request);
+        $response = $httpClient->request('GET', $request);
+
+        $data = $response->getContent();
 
         $jsonResults = [];
 
-        if ($response != '{}') {
-            $jsonResults = json_decode($response, true);
+        if ($data != '{}') {
+            $jsonResults = json_decode($data, true);
         } else {
             $jsonResults["ISBN:$isbn"] = [];
         }

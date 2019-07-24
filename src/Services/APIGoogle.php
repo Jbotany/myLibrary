@@ -4,18 +4,24 @@
 namespace App\Services;
 
 
+use Symfony\Component\HttpClient\HttpClient;
+
 class APIGoogle
 {
     public function getAPIGoogleResults(string $isbn) : array
     {
+        $httpClient = HttpClient::create();
+
         $googleAPIRequest = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' . $isbn;
 
-        $response = file_get_contents($googleAPIRequest);
+        $response = $httpClient->request('GET', $googleAPIRequest);
+
+        $data = $response->getContent();
 
         $jsonResults = [];
 
-        if ($response != '{}') {
-            $jsonResults = json_decode($response, true);
+        if ($data != '{}') {
+            $jsonResults = json_decode($data, true);
         } else {
             $jsonResults['items'][0]['volumeInfo'] = [];
         }
