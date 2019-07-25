@@ -22,10 +22,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BookController extends AbstractController
 {
-    const COVERPLACEHOLDER = "https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png";
+    const COVER_PLACEHOLDER = "https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png";
 
     /**
      * @Route("/", name="book_index", methods={"GET"})
+     * @param BookRepository $bookRepository
+     * @return Response
      */
     public function index(BookRepository $bookRepository): Response
     {
@@ -35,7 +37,10 @@ class BookController extends AbstractController
     }
 
     /**
+     * Add a book manually
      * @Route("/new", name="book_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -59,7 +64,14 @@ class BookController extends AbstractController
     }
 
     /**
+     * Add a book with is ISBN
      * @Route("/newISBN", name="book_newISBN", methods={"GET","POST"})
+     * @param Request $request
+     * @param AuthorRepository $authorRepository
+     * @param BookAuthors $bookAuthors
+     * @param BookPublisher $bookPublisher
+     * @param APIMixer $APIMixer
+     * @return Response
      */
     public function newISBN(
         Request $request,
@@ -77,8 +89,14 @@ class BookController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $isbn = $form->getData()->getISBN();
 
+            /**
+             * Return results of APIs or an empty array
+             */
             $bookInfos = $APIMixer->mixAPIResults($isbn);
 
+            /**
+             * Set database fields with API data
+             */
             if (!empty($bookInfos)) {
                 $title = $bookInfos['title'];
 
@@ -100,7 +118,7 @@ class BookController extends AbstractController
                 if ($cover) {
                     $book->setCover($cover);
                 } else {
-                    $book->setCover(self::COVERPLACEHOLDER);
+                    $book->setCover(self::COVER_PLACEHOLDER);
                 }
 
 
@@ -120,7 +138,10 @@ class BookController extends AbstractController
     }
 
     /**
+     * Show list of unread books
      * @Route("/unread", name="book_unread", methods={"GET"})
+     * @param BookRepository $bookRepository
+     * @return Response
      */
     public function showUnread(BookRepository $bookRepository): Response
     {
@@ -130,7 +151,10 @@ class BookController extends AbstractController
     }
 
     /**
+     * Show list of read books
      * @Route("/read", name="book_read", methods={"GET"})
+     * @param BookRepository $bookRepository
+     * @return Response
      */
     public function showRead(BookRepository $bookRepository): Response
     {
@@ -141,7 +165,10 @@ class BookController extends AbstractController
 
 
     /**
+     * Show details of a book
      * @Route("/{id}", name="book_show", methods={"GET"})
+     * @param Book $book
+     * @return Response
      */
     public function show(Book $book): Response
     {
@@ -151,7 +178,11 @@ class BookController extends AbstractController
     }
 
     /**
+     * Edit details on a book
      * @Route("/{id}/edit", name="book_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Book $book
+     * @return Response
      */
     public function edit(Request $request, Book $book): Response
     {
@@ -173,7 +204,11 @@ class BookController extends AbstractController
     }
 
     /**
+     * Delete an existing book
      * @Route("/{id}", name="book_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Book $book
+     * @return Response
      */
     public function delete(Request $request, Book $book): Response
     {

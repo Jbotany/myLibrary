@@ -3,7 +3,11 @@
 
 namespace App\Services;
 
-
+/**
+ * Mix data of different APIs and return array
+ * Class APIMixer
+ * @package App\Services
+ */
 class APIMixer
 {
     private $openLibrary;
@@ -15,7 +19,11 @@ class APIMixer
         $this->google = $google;
     }
 
-
+    /**
+     * Mix data of APIs results
+     * @param string $isbn
+     * @return array
+     */
     public function mixAPIResults(string $isbn): array
     {
         $openLibraryResults = $this->openLibrary->getAPIOpenLibraryResults($isbn);

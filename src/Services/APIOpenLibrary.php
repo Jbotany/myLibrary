@@ -6,6 +6,11 @@ namespace App\Services;
 
 use Symfony\Component\HttpClient\HttpClient;
 
+/**
+ * This class calls the OpenLibrary API
+ * Class APIOpenLibrary
+ * @package App\Services
+ */
 class APIOpenLibrary
 {
     public function getAPIOpenLibraryResults(string $isbn): array
@@ -29,7 +34,11 @@ class APIOpenLibrary
         return self::orderInRightFormat($jsonResults["ISBN:$isbn"]);
     }
 
-
+    /**
+     * Organize data in a standard format
+     * @param array $data
+     * @return array
+     */
     private function orderInRightFormat(array $data): array
     {
         $results['title'] = $data['title'] ?? '';

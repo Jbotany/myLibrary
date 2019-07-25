@@ -6,6 +6,11 @@ namespace App\Services;
 
 use Symfony\Component\HttpClient\HttpClient;
 
+/**
+ * This class calls the OpenLibrary API
+ * Class APIGoogle
+ * @package App\Services
+ */
 class APIGoogle
 {
     public function getAPIGoogleResults(string $isbn) : array
@@ -29,6 +34,11 @@ class APIGoogle
         return self::orderInRightFormat($jsonResults['items'][0]['volumeInfo']);
     }
 
+    /**
+     * Organize data in a standard format
+     * @param array $data
+     * @return array
+     */
     private function orderInRightFormat(array $data): array
     {
         $results['title'] = $data['title'] ?? null;

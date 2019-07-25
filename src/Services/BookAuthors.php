@@ -9,6 +9,11 @@ use App\Entity\Book;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Manage authors of books
+ * Class BookAuthors
+ * @package App\Services
+ */
 class BookAuthors
 {
     private $em;
@@ -18,6 +23,12 @@ class BookAuthors
         $this->em = $em;
     }
 
+    /**
+     * Add authors in books
+     * @param array $bookAuthors
+     * @param AuthorRepository $authorRepository
+     * @param Book $book
+     */
     public function setAuthors(array $bookAuthors, AuthorRepository $authorRepository, Book $book): void
     {
         $authors = self::checkAuthors($bookAuthors, $authorRepository);
@@ -28,6 +39,12 @@ class BookAuthors
         }
     }
 
+    /**
+     * Check if author already exists in database
+     * @param array $bookAuthors
+     * @param AuthorRepository $authorRepository
+     * @return array
+     */
     private function checkAuthors(
         array $bookAuthors,
         AuthorRepository $authorRepository
